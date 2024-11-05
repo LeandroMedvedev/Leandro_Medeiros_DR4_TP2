@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900');
+@import url('https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900');
+
+// Colors
+$color-white: #fff;
+$color-black: #000;
+$color-white-smoke: #f8f8f8;
+$color-light-gray: #d2d2d2;
+$color-bright-coral: #fa5a50;
+$color-dark-purple: #2c001e;
+$color-deep-red: #690037;
+$color-soft-pink: #fab9ff;
+$color-navy-blue: #000050;
+$color-light-blue: #b4dcfa;
+$color-dark-red: #ac1015;
+$color-dark-gray: #5f6368;
+$color-dark-background: #282c34;
+$color-dark-blue: #181a1f;
+$color-black-dark: #03031b;
+$color-green: #004d00;
+
+// Fonts
+$font-montserrat: 'Montserrat', sans-serif;
+$font-poppins: 'Poppins', sans-serif;
+$font-dm-sans: 'DM Sans', sans-serif;
+$font-serif: 'Alegreya', serif;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  padding: 0 10px;
+  min-height: 100vh;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  gap: 30px;
+  text-align: center;
+  font-family: $font-poppins;
+  color: $color-dark-blue;
+  background-color: $color-white-smoke;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: $color-dark-background;
+    color: $color-white;
+  }
+}
+
+li {
+  list-style-type: none;
+}
+
+a {
+  color: $color-white;
+}
+
+.loading {
+  font-size: 2rem;
+  font-family: $font-dm-sans;
+  margin: auto;
+}
