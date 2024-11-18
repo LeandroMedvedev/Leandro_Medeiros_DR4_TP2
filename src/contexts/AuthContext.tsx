@@ -1,8 +1,8 @@
 import { createContext, ReactNode, useContext, useState } from 'react';
 
-import { AuthContextProps } from '../interfaces';
+import { IAuthContextProps } from '../interfaces';
 
-const AuthContext = createContext<AuthContextProps | undefined>(undefined);
+const AuthContext = createContext<IAuthContextProps | undefined>(undefined);
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -17,10 +17,12 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-const useAuth = () => {
+const useAuthContext = () => {
   const context = useContext(AuthContext);
-  if (!context) throw new Error('useAuth must be used within an AuthProvider');
+  if (!context)
+    throw new Error('useAuthContext must be used within an AuthProvider');
+
   return context;
 };
 
-export { AuthProvider, useAuth };
+export { AuthProvider, useAuthContext };

@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 
-import { Button } from '../../components';
-import { useAuth } from '../../context/AuthContext';
+import { ButtonComponent } from '../../components';
+import { useAuthContext } from '../../contexts';
 
 const SignIn: React.FC = () => {
   const navigate = useNavigate();
-  const { signIn } = useAuth();
+  const { signIn } = useAuthContext();
 
   const handleSignIn = () => {
     navigate('/dashboard');
@@ -15,7 +15,7 @@ const SignIn: React.FC = () => {
   return (
     <div>
       <h1>Sign In</h1>
-      <Button onClick={handleSignIn} text='Entrar' />
+      <ButtonComponent onClick={handleSignIn}>Entrar</ButtonComponent>
     </div>
   );
 };

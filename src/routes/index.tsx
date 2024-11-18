@@ -8,12 +8,13 @@ const AppRoutes = () => {
     <Router>
       <Routes>
         {/* Rotas privadas */}
-        <Route element={<PrivateRoute />}>
-          <Route path='/' element={<Home />} />
-          <Route path='/dashboard' element={<Dashboard />} />
-          <Route path='/settings' element={<Settings />} />
-          <Route path='/form' element={<Form />} />
-        </Route>
+        {/* <Route element={<PrivateRoute />}> */}
+        <Route path='/' element={<Home />} />
+        <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/settings' element={<Settings />} />
+        <Route path='/new/:type' element={<Form />} />
+        <Route path='/type/:id' element={<Form />} />
+        {/* </Route> */}
 
         {/* Rotas públicas */}
         <Route path='/signin' element={<SignIn />} />
