@@ -1,5 +1,4 @@
 export type { default as IAlertProps } from './alert';
-export type { default as IAuthContextProps } from './authContext';
 export type { default as IAvatarProps } from './avatar';
 export type { default as IBoxProps } from './box';
 export type { default as IButtonProps } from './button';

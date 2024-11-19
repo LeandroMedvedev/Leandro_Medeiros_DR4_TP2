@@ -1,15 +1,16 @@
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { ButtonComponent } from '../../components';
-import { useAuthContext } from '../../contexts';
+// import { useAppContext } from '../../contexts';
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
-  const { signOut } = useAuthContext();
+  // const { signOut } = useAppContext();
 
   const handleSignOut = () => {
     navigate('/signin');
-    signOut();
+    // signOut();
   };
 
   return (

@@ -2,8 +2,11 @@ import { ButtonProps } from '@mui/material';
 import { ReactNode } from 'react';
 
 interface IButtonProps extends ButtonProps {
-  children: ReactNode;
-  onClick: () => void;
+  children?: ReactNode;
+  props?: any;
+  variant?: 'text' | 'contained' | 'outlined';
+  size?: 'small' | 'medium' | 'large';
+  classname?: '';
 }
 
 export default IButtonProps;
