@@ -8,6 +8,7 @@ export type { default as IContainerProps } from './container';
 export type { default as IFabProps } from './fab';
 export type { default as IGridProps } from './grid';
 export type { default as IIconButtonProps } from './iconButton';
+export type { default as SignInDataProps } from './signInData';
 export type { default as ISnackbarProps } from './snackbar';
 export type { default as ISwitchProps } from './switch';
 export type { default as ITabProps } from './tab';

@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { createContext, useContext, useState } from 'react';
 
 import {
@@ -6,6 +7,7 @@ import {
   GridComponent,
   SnackbarComponent,
 } from '../components';
+import { validateEnvVariables } from '../utils';
 
 type AlertSeverity = 'info' | 'warning' | 'error' | 'success';
 
@@ -16,6 +18,7 @@ interface IShowAlertParams {
 interface IAppContext {
   showSnackbarMessage: (message: string) => void;
   showAlertMessage: IShowAlertParams;
+  supabase: SupabaseClient<any, 'public', any>;
 }
 
 interface IAppProviderProps {
@@ -23,6 +26,13 @@ interface IAppProviderProps {
 }
 
 const AppContext = createContext<IAppContext | undefined>(undefined);
+
+const { VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY } = validateEnvVariables({
+  VITE_SUPABASE_URL: import.meta.env.VITE_SUPABASE_URL,
+  VITE_SUPABASE_ANON_KEY: import.meta.env.VITE_SUPABASE_ANON_KEY,
+});
+
+const supabase = createClient(VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY);
 
 const AppProvider: React.FC<IAppProviderProps> = ({ children }) => {
   const [snackbarMessage, setSnackbarMessage] = useState('');
@@ -61,6 +71,7 @@ const AppProvider: React.FC<IAppProviderProps> = ({ children }) => {
     // signOut,
     showSnackbarMessage,
     showAlertMessage,
+    supabase,
   };
 
   return (
