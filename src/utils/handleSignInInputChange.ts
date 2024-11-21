@@ -1,6 +1,6 @@
 import { SignInDataProps } from '../interfaces';
 
-const handleInputChange = (
+const handleSignInInputChange = (
   setData: React.Dispatch<React.SetStateAction<SignInDataProps>>,
   field: keyof SignInDataProps,
   value: string
@@ -14,4 +14,5 @@ const handleInputChange = (
   }));
 };
 
-export default handleInputChange;
+
+export default handleSignInInputChange;

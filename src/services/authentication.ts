@@ -1,11 +1,6 @@
-import { SupabaseClient } from '@supabase/supabase-js';
 import { redirect } from 'react-router-dom';
 
-type SignInArgs = {
-  email: string;
-  password: string;
-  supabase: SupabaseClient<any, 'public', any>;
-}
+import { TAuthData } from '../interfaces';
 
 const isAuthenticated = () => {
   const session: string | null = localStorage.getItem('session');
@@ -23,8 +18,12 @@ const handlePrivateRouteChecking = () => {
   return null;
 }
 
-const signIn = async ({ email, password, supabase }: SignInArgs) => await supabase.auth.signInWithPassword({
+const signIn = async ({ email, password, supabase }: TAuthData) => await supabase.auth.signInWithPassword({
   email, password
 });
 
-export { isAuthenticated, handlePrivateRouteChecking, signIn }
+const signUp = async ({ email, password, supabase }: TAuthData) => await supabase.auth.signUp({
+  email, password
+});
+
+export { isAuthenticated, handlePrivateRouteChecking, signIn, signUp }

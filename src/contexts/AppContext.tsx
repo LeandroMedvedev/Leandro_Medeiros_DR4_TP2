@@ -43,10 +43,6 @@ const AppProvider: React.FC<IAppProviderProps> = ({ children }) => {
     AlertSeverity | undefined
   >();
   const timeoutDuration = 5000;
-  // const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  // const signIn = () => setIsAuthenticated(true);
-  // const signOut = () => setIsAuthenticated(false);
 
   const showSnackbarMessage = (message: string) => {
     setSnackbarMessage(message);
@@ -66,9 +62,6 @@ const AppProvider: React.FC<IAppProviderProps> = ({ children }) => {
   };
 
   const sharedState = {
-    // isAuthenticated,
-    // signIn,
-    // signOut,
     showSnackbarMessage,
     showAlertMessage,
     supabase,
@@ -90,7 +83,7 @@ const AppProvider: React.FC<IAppProviderProps> = ({ children }) => {
           padding={2}
           sx={{ position: 'absolute', left: 0, bottom: 0, width: '100%' }}
         >
-          <GridComponent size={3}>
+          <GridComponent size={5}>
             <AlertComponent severity={alertSeverity}>
               {alertMessage}
             </AlertComponent>

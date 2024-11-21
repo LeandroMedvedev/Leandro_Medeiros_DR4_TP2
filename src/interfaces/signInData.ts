@@ -1,12 +1,8 @@
-interface FormField {
-  value: string;
-  error: string | null;
-  helperText: string | null;
-}
+import FormInputField from './formInputField';
 
 interface SignInDataProps {
-  email: FormField;
-  password: FormField;
+  email: FormInputField;
+  password: FormInputField;
 }
 
 export default SignInDataProps;

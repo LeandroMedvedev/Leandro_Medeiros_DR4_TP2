@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
+import { handleSignInInputChange } from '../../utils';
+import { SignInDataProps } from '../../interfaces';
 import { useAppContext } from '../../contexts';
 import { signIn } from '../../services';
 import { logo } from '../../assets';
@@ -12,8 +14,6 @@ import {
   TextFieldComponent,
   TypographyComponent,
 } from '../../components';
-import { handleInputChange } from '../../utils';
-import { SignInDataProps } from '../../interfaces';
 
 const SignIn: React.FC = () => {
   const { showSnackbarMessage, showAlertMessage, supabase } = useAppContext();
@@ -22,12 +22,12 @@ const SignIn: React.FC = () => {
   const [data, setData] = useState<SignInDataProps>({
     email: {
       value: '',
-      error: null,
+      error: false,
       helperText: null,
     },
     password: {
       value: '',
-      error: null,
+      error: false,
       helperText: null,
     },
   });
@@ -39,8 +39,13 @@ const SignIn: React.FC = () => {
       supabase,
     });
 
-    if (error && error.message === 'Invalid login credentials') {
-      showSnackbarMessage('Credenciais inválidas');
+    const wrongCredentials =
+      error && error.message === 'Invalid login credentials';
+    const emptyFields = !response.session || !response.user;
+    const invalidCredentials = wrongCredentials || emptyFields;
+
+    if (invalidCredentials) {
+      showAlertMessage('Credenciais inválidas', 'error');
     } else {
       localStorage.setItem('session', JSON.stringify(response.session));
       localStorage.setItem('user', JSON.stringify(response.user));
@@ -77,7 +82,7 @@ const SignIn: React.FC = () => {
             fullWidth
             value={data.email.value}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              handleInputChange(setData, 'email', event.target.value);
+              handleSignInInputChange(setData, 'email', event.target.value);
             }}
           />
         </GridComponent>
@@ -88,17 +93,10 @@ const SignIn: React.FC = () => {
             fullWidth
             value={data.password.value}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              handleInputChange(setData, 'password', event.target.value);
+              handleSignInInputChange(setData, 'password', event.target.value);
             }}
             type='password'
           />
-        </GridComponent>
-
-        <GridComponent
-          sx={{ ...styles.centerBox, ...styles.marginTop }}
-          size={{ xs: 8 }}
-        >
-          <Link to='/signup'>Cadastrar</Link>
         </GridComponent>
 
         <GridComponent size={{ xs: 8 }}>
@@ -106,9 +104,19 @@ const SignIn: React.FC = () => {
             sx={styles.marginTop}
             fullWidth
             onClick={checkSignIn}
+            disabled={!data.email.value || !data.password.value}
           >
             Enviar
           </ButtonComponent>
+        </GridComponent>
+
+        <GridComponent
+          sx={{ ...styles.centerBox, ...styles.marginTop }}
+          size={{ xs: 8 }}
+        >
+          <p>
+            Ainda não é cadastrado? <Link to='/signup'> Cadastrar</Link>
+          </p>
         </GridComponent>
       </GridComponent>
     </BoxComponent>
