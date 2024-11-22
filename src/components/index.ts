@@ -12,7 +12,7 @@ export { default as SnackbarComponent } from './Snackbar';
 export { default as SwitchComponent } from './Switch';
 export { default as TabComponent } from './Tab';
 export { default as TextFieldComponent } from './TextField';
-export { default as TextComponent } from './Typography';
+export { default as TypographyComponent } from './Typography';
 
 export { default as DatePickerComponent } from './DatePicker';
 export { default as DateTimePicker } from './DateTimePicker';

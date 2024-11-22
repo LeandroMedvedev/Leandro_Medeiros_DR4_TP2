@@ -60,11 +60,22 @@ li {
 }
 
 a {
-  color: $color-white;
+  color: $color-dark-background;
 }
 
 .loading {
   font-size: 2rem;
   font-family: $font-dm-sans;
   margin: auto;
+}
+
+.app-background {
+  background-color: $color-light-gray;
+}
+
+.general-textfield > div,
+.general-button {
+  height: 56px;
+  border-radius: 10px !important;
+  font-family: $font-poppins;
 }

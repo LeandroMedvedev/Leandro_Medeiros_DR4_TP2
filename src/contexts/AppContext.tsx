@@ -2,12 +2,14 @@ import { TFunction } from 'i18next';
 import { useTranslation } from 'react-i18next';
 import React, { ReactNode, useEffect } from 'react';
 import { createContext, useContext, useState } from 'react';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
 import {
   AlertComponent,
   GridComponent,
   SnackbarComponent,
 } from '../components';
+import { validateEnvVariables } from '../utils';
 
 type AlertSeverity = 'info' | 'warning' | 'error' | 'success';
 
@@ -20,6 +22,7 @@ interface IAppContext {
   showAlertMessage: IShowAlertParams;
   changeLanguage: (lang: string) => void;
   translate: TFunction<'translation', undefined>;
+  supabase: SupabaseClient<any, 'public', any>;
 }
 
 interface IAppProviderProps {
@@ -27,6 +30,13 @@ interface IAppProviderProps {
 }
 
 const AppContext = createContext<IAppContext | undefined>(undefined);
+
+const { VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY } = validateEnvVariables({
+  VITE_SUPABASE_URL: import.meta.env.VITE_SUPABASE_URL,
+  VITE_SUPABASE_ANON_KEY: import.meta.env.VITE_SUPABASE_ANON_KEY,
+});
+
+const supabase = createClient(VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY);
 
 const AppProvider: React.FC<IAppProviderProps> = ({ children }) => {
   const [snackbarMessage, setSnackbarMessage] = useState('');
@@ -66,6 +76,7 @@ const AppProvider: React.FC<IAppProviderProps> = ({ children }) => {
     showAlertMessage,
     changeLanguage,
     translate,
+    supabase,
   };
 
   useEffect(() => {
@@ -95,7 +106,7 @@ const AppProvider: React.FC<IAppProviderProps> = ({ children }) => {
           padding={2}
           sx={{ position: 'absolute', left: 0, bottom: 0, width: '100%' }}
         >
-          <GridComponent size={3}>
+          <GridComponent size={5}>
             <AlertComponent severity={alertSeverity}>
               {alertMessage}
             </AlertComponent>

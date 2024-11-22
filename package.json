@@ -40,6 +40,7 @@
     "@mui/material": "^6.1.6",
     "@mui/styled-engine-sc": "^6.1.6",
     "@mui/x-date-pickers": "^7.22.1",
+    "@supabase/supabase-js": "^2.46.1",
     "@types/react-router-dom": "^5.3.3",
     "dayjs": "^1.11.13",
     "i18next": "^23.16.8",
