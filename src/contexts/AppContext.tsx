@@ -1,4 +1,6 @@
-import React, { ReactNode } from 'react';
+import { TFunction } from 'i18next';
+import { useTranslation } from 'react-i18next';
+import React, { ReactNode, useEffect } from 'react';
 import { createContext, useContext, useState } from 'react';
 
 import {
@@ -16,6 +18,8 @@ interface IShowAlertParams {
 interface IAppContext {
   showSnackbarMessage: (message: string) => void;
   showAlertMessage: IShowAlertParams;
+  changeLanguage: (lang: string) => void;
+  translate: TFunction<'translation', undefined>;
 }
 
 interface IAppProviderProps {
@@ -33,10 +37,7 @@ const AppProvider: React.FC<IAppProviderProps> = ({ children }) => {
     AlertSeverity | undefined
   >();
   const timeoutDuration = 5000;
-  // const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  // const signIn = () => setIsAuthenticated(true);
-  // const signOut = () => setIsAuthenticated(false);
+  const { t: translate, i18n } = useTranslation();
 
   const showSnackbarMessage = (message: string) => {
     setSnackbarMessage(message);
@@ -50,18 +51,33 @@ const AppProvider: React.FC<IAppProviderProps> = ({ children }) => {
     setTimeout(() => setAlertMessage(''), timeoutDuration);
   };
 
+  const changeLanguage = (lang: string) => {
+    i18n.changeLanguage(lang);
+    localStorage.setItem('language', lang);
+  };
+
   const handleClose = () => {
     setSnackbarMessage('');
     setSnackbarOpen(false);
   };
 
   const sharedState = {
-    // isAuthenticated,
-    // signIn,
-    // signOut,
     showSnackbarMessage,
     showAlertMessage,
+    changeLanguage,
+    translate,
   };
+
+  useEffect(() => {
+    const storedLanguage = localStorage.getItem('language');
+
+    if (storedLanguage) {
+      changeLanguage(storedLanguage);
+    } else {
+      const navLanguage = navigator.language.split('-').at(0);
+      if (navLanguage) changeLanguage(navLanguage);
+    }
+  }, []);
 
   return (
     <AppContext.Provider value={sharedState}>

@@ -6,7 +6,8 @@ import { useAppContext } from '../../contexts';
 import DateTimePickerComponent from '../../components/DateTimePicker';
 
 const SignIn: React.FC = () => {
-  const { showSnackbarMessage, showAlertMessage } = useAppContext();
+  const { showSnackbarMessage, showAlertMessage, translate, changeLanguage } =
+    useAppContext();
   const navigate = useNavigate();
 
   const handleSignIn = () => {
@@ -16,15 +17,12 @@ const SignIn: React.FC = () => {
   return (
     <div>
       <h1>Sign In</h1>
-      <ButtonComponent onClick={handleSignIn}>Entrar</ButtonComponent>
-      <ButtonComponent onClick={() => showSnackbarMessage('Sucesso')}>
-        Exibir Snackbar
+      <ButtonComponent onClick={handleSignIn}>
+        {translate('welcome')}
       </ButtonComponent>
-      <ButtonComponent
-        onClick={() => showAlertMessage('Mensagem de Alerta', 'error')}
-      >
-        Exibir Alerta
-      </ButtonComponent>
+      <ButtonComponent onClick={() => changeLanguage('en')}>EN</ButtonComponent>
+      <ButtonComponent onClick={() => changeLanguage('es')}>ES</ButtonComponent>
+      <ButtonComponent onClick={() => changeLanguage('pt')}>PT</ButtonComponent>
 
       <DateTimePickerComponent
         ampm={false}
