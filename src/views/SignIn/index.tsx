@@ -16,7 +16,7 @@ import {
 } from '../../components';
 
 const SignIn: React.FC = () => {
-  const { showAlertMessage, supabase } = useAppContext();
+  const { showAlertMessage, supabase, translate } = useAppContext();
   const navigate = useNavigate();
 
   const [data, setData] = useState<SignInDataProps>({
@@ -72,7 +72,7 @@ const SignIn: React.FC = () => {
 
         <GridComponent sx={styles.marginTop} size={{ xs: 8 }}>
           <TypographyComponent variant='h5'>
-            Seja Bem-vindo!
+            {translate('welcome')}!
           </TypographyComponent>
         </GridComponent>
 

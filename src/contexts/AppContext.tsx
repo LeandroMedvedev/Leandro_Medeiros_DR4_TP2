@@ -4,12 +4,12 @@ import React, { ReactNode, useEffect } from 'react';
 import { createContext, useContext, useState } from 'react';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
+import { validateEnvVariables } from '../utils';
 import {
   AlertComponent,
   GridComponent,
   SnackbarComponent,
 } from '../components';
-import { validateEnvVariables } from '../utils';
 
 type AlertSeverity = 'info' | 'warning' | 'error' | 'success';
 
