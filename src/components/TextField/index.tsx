@@ -9,8 +9,8 @@ const TextFieldComponent: React.FC<ITextFieldProps> = (props) => {
     <TextField
       className={`general-textfield ${props.className ? props.className : ''}`}
       variant={variant}
-      helperText={helperText}
-      error={!!error}
+      // helperText={helperText}
+      // error={!!error}
       {...props}
     />
   );

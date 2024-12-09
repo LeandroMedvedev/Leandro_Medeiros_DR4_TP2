@@ -1,10 +1,14 @@
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { ptBR } from '@mui/x-date-pickers/locales';
 
-const DateTimePickerComponent = ({ ...props }) => {
+import { IDateTimePickerProps } from '../../interfaces';
+
+const DateTimePickerComponent: React.FC<IDateTimePickerProps> = ({
+  ...props
+}) => {
   return (
     <LocalizationProvider
       localeText={
