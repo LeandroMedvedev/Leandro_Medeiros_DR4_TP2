@@ -1,4 +1,8 @@
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
 import { TFunction } from 'i18next';
+import duration from 'dayjs/plugin/duration';
+import timezone from 'dayjs/plugin/timezone';
 import { useTranslation } from 'react-i18next';
 import React, { ReactNode, useEffect } from 'react';
 import { createContext, useContext, useState } from 'react';
@@ -10,6 +14,11 @@ import {
   GridComponent,
   SnackbarComponent,
 } from '../components';
+
+/* extensões (abaixo) necessárias para que função adjustDateTimeForTimezone funcione */
+dayjs.extend(utc);
+dayjs.extend(duration);
+dayjs.extend(timezone);
 
 type AlertSeverity = 'info' | 'warning' | 'error' | 'success';
 

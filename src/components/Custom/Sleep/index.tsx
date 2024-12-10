@@ -69,7 +69,7 @@ const SleepComponent: React.FC<ISleepProps> = ({
             handleInputChange('observation', event.target.value, data, setData);
           }}
           name='observation'
-          // rows={2}
+          // rows={6}
           fullWidth={true}
           multiline={true}
         />

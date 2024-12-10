@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { getTitle, getUser, validateFields } from '../../utils';
-import { drop, get, save, update } from '../../services';
+import { drop, get, update, save } from '../../services';
 import { useAppContext } from '../../contexts';
 import {
   AppBarComponent,
@@ -50,13 +50,25 @@ const Form: React.FC = () => {
   };
 
   const loadData = async (id: string) => {
-    if (id) {
-      const result = await get('action_students', [
-        { field: 'id', value: id },
-        { field: 'user_id', value: getUser().id },
-      ]);
-      setData(result);
+    // if (id) {
+    //   const result = await get('action_students', [
+    //     { field: 'id', value: id },
+    //     { field: 'user_id', value: getUser().id },
+    //   ]);
+    //   setData(result);
+    // }
+  };
+
+  const save = async () => {
+    const d = JSON.parse(localStorage.getItem('items'));
+    let dFinal = [];
+
+    if (d) {
+      dFinal = [...d, data];
+    } else {
+      dFinal = [data];
     }
+    localStorage.setItem('items', JSON.stringify(dFinal));
   };
 
   useEffect(() => {
@@ -107,7 +119,8 @@ const Form: React.FC = () => {
                     await update('action_students', data, id);
                   } else {
                     data.user_id = getUser().id;
-                    await save('action_students', data);
+                    // await save('action_students', data);
+                    save(data); /* localStorage */
                   }
                   showAlertMessage(
                     `Item ${id ? 'editado' : 'criado'} com sucesso!!!`,

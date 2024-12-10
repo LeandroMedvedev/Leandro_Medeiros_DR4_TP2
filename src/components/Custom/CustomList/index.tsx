@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import List from '@mui/material/List';
 import Avatar from '@mui/material/Avatar';
 import ListItem from '@mui/material/ListItem';
@@ -50,6 +51,7 @@ const CustomListComponent: React.FC<ICustomListProps> = ({
         const typeStr = actionTypeListToInt[item.action_type];
         return (
           <ListItem
+            key={uuidv4()}
             sx={{
               backgroundColor: '#fff',
               borderRadius: '60px',
